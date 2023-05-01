@@ -6,16 +6,15 @@
     <div class="row justify-content-center align-items-center">
         <div class="card" style="width: 24rem;">
             <div class="card-header">
-                Tambah Mahasiswa
+                Tambah mahasiswa
             </div>
             <div class="card-body">
                 @if ($errors->any())
                 <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your i
-                    nput.<br><br>
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                            <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -30,12 +29,14 @@
                         <label for="Nama">Nama</label>
                         <input type="Nama" name="Nama" class="form-control" id="Nama" aria-describedby="Nama">
                     </div>
-                    <label for="kelas">Kelas</label>
-                    <select name="kelas" class="form-control">
-                        @foreach ($kelas as $Kelas)
-                        <option value="{{$Kelas->id}}">{{$Kelas->nama_kelas}}</option>
-                        @endforeach
-                    </select>
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <select name="kelas" class="form-control">
+                            @foreach ($kelas as $Kelas)
+                            <option value="{{$Kelas->id}}">{{$Kelas->nama_kelas}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
                         <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan"
@@ -48,11 +49,11 @@
                     </div>
                     <div class="form-group">
                         <label for="Email">Email</label>
-                        <input type="Email" name="Email" class="formcontrol" id="Email" aria-describedby="Email">
+                        <input type="Email" name="Email" class="form-control" id="Email" aria-describedby="Email">
                     </div>
                     <div class="form-group">
                         <label for="Tanggal_Lahir">Tanggal_Lahir</label>
-                        <input type="date" name="Tanggal_Lahir" class="formcontrol" id="Tanggal_Lahir"
+                        <input type="date" name="Tanggal_Lahir" class="form-control" id="Tanggal_Lahir"
                             aria-describedby="Tanggal_Lahir">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>

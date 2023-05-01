@@ -37,7 +37,7 @@ class MahasiswaController extends Controller
     public function create()
     {
         $kelas = Kelas::all();
-        return view('mahasiswas.create',['kelas' => $kelas]);
+        return view('mahasiswas.create',['kelas'=>$kelas]);
     }
 
     /**
@@ -72,7 +72,7 @@ class MahasiswaController extends Controller
         $mahasiswas->kelas()->associate($kelas);
         $mahasiswas->save();
 
-         return redirect()->route('mahasiswas.index')->with('success', 'Mahasiswa Berhasil Ditambahkan');
+        return redirect()->route('mahasiswas.index')->with('success', 'Mahasiswa Berhasil Ditambahkan');
     }
 
     /**
@@ -97,7 +97,7 @@ class MahasiswaController extends Controller
     {
         $Mahasiswa = Mahasiswa::find($Nim);
         $Kelas = Kelas::all();
-        return view('mahasiswas.edit',['kelas' => $Kelas], compact('Mahasiswa'));
+        return view('mahasiswas.edit', compact('Mahasiswa', 'kelas'));
     }
 
     /**

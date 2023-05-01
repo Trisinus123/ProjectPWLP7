@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Kelas;
 
 class Mahasiswa extends Model
-{
+{ 
     protected $table = "mahasiswas";
     public $timestamps = false;
     protected $primaryKey = 'Nim';
@@ -17,11 +18,11 @@ class Mahasiswa extends Model
     protected $fillable = [
         'Nim',
         'Nama',
-        'Kelas',
         'Jurusan',
         'No_Handphone',
         'Email',
         'Tanggal_Lahir',
+        'kelas_id',
     ];
 
     public function kelas(){
