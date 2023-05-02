@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use App\Models\MataKuliah;
+use App\Models\MahasiswaMataKuliah;
 
 class MahasiswaController extends Controller
 {
@@ -51,7 +52,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
-            'Kelas' => 'required',
+            'kelas' => 'required',
             'Jurusan' => 'required',
             'No_Handphone' => 'required',
             'Email' => 'required',
@@ -67,7 +68,7 @@ class MahasiswaController extends Controller
         $mahasiswas->Tanggal_Lahir = $request->get('Tanggal_Lahir');
 
         $kelas = new Kelas;
-        $kelas->id = $request->get('Kelas');
+        $kelas->id = $request->get('kelas');
 
         $mahasiswas->kelas()->associate($kelas);
         $mahasiswas->save();
@@ -96,7 +97,7 @@ class MahasiswaController extends Controller
     public function edit($Nim)
     {
         $Mahasiswa = Mahasiswa::find($Nim);
-        $Kelas = Kelas::all();
+        $kelas = Kelas::all();
         return view('mahasiswas.edit', compact('Mahasiswa', 'kelas'));
     }
 
@@ -113,7 +114,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
-            'Kelas' => 'required',
+            'kelas' => 'required',
             'Jurusan' => 'required',
             'No_Handphone' => 'required',
             'Email' => 'required',
@@ -129,7 +130,7 @@ class MahasiswaController extends Controller
         $mahasiswas->Tanggal_Lahir = $request->get('Tanggal_Lahir');
 
         $kelas = new Kelas;
-        $kelas->id = $request->get('Kelas');
+        $kelas->id = $request->get('kelas');
 
         $mahasiswas->kelas()->associate($kelas);
         $mahasiswas->save();
@@ -151,6 +152,14 @@ class MahasiswaController extends Controller
     {
         Mahasiswa::find($Nim)->delete();
         return redirect()->route('mahasiswas.index')->with('success','Mahasiswa Berhasil Dihapus');
-    }    
-};
+    } 
+
+    public function nilai($Nim){
+        
+        $Mahasiswa = Mahasiswa::find($Nim);
+        
+        return view('mahasiswas.nilai', compact('Mahasiswa'));
+    }
+}
     
+
