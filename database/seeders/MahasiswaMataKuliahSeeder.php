@@ -17,7 +17,7 @@ class MahasiswaMataKuliahSeeder extends Seeder
     {
         $nilai = [
             [
-                'mahasiswa_id' => 2141720035,
+                'mahasiswa_id' => 2141720034,
                 'matakuliah_id' => 1,
                 'nilai' => 80,
             ],
