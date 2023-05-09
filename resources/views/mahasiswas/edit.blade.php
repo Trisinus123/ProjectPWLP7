@@ -34,6 +34,11 @@
                             aria-describedby="Nama">
                     </div>
                     <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <input type="file" class="form-control" required="required" name="foto" value="{{$Mahasiswa->foto}}" placeholder="{{$Mahasiswa->foto}}"></br>
+                        <img src="{{asset('storage/'.$Mahasiswa->foto)}}" alt="foto profile" style="height: 100px; width: 100px; overflow: hidden; object-fit: cover;">
+                    </div>
+                    <div class="form-group">
                         <label for="kelas">Kelas</label>
                         <select name="kelas" class="form-control">
                             @foreach ($kelas as $Kelas)

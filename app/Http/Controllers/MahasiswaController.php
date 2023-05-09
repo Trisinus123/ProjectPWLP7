@@ -7,6 +7,8 @@ use App\Models\Mahasiswa;
 use App\Models\Kelas;
 use App\Models\MataKuliah;
 use App\Models\MahasiswaMataKuliah;
+use Barryvdh\DomPDF\Facade\PDF;
+
 
 class MahasiswaController extends Controller
 {
@@ -52,6 +54,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
+            'foto' => 'required',
             'kelas' => 'required',
             'Jurusan' => 'required',
             'No_Handphone' => 'required',
@@ -62,6 +65,7 @@ class MahasiswaController extends Controller
         $mahasiswas = new Mahasiswa;
         $mahasiswas->Nim = $request->get('Nim');
         $mahasiswas->Nama = $request->get('Nama');
+        $mahasiswas->foto = $image_name;
         $mahasiswas->Jurusan = $request->get('Jurusan');
         $mahasiswas->No_Handphone = $request->get('No_Handphone');
         $mahasiswas->Email = $request->get('Email');
@@ -114,6 +118,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
+            'Foto' => 'required',
             'kelas' => 'required',
             'Jurusan' => 'required',
             'No_Handphone' => 'required',
@@ -128,6 +133,7 @@ class MahasiswaController extends Controller
         $mahasiswas->No_Handphone = $request->get('No_Handphone');
         $mahasiswas->Email = $request->get('Email');
         $mahasiswas->Tanggal_Lahir = $request->get('Tanggal_Lahir');
+        
 
         $kelas = new Kelas;
         $kelas->id = $request->get('kelas');
@@ -159,6 +165,14 @@ class MahasiswaController extends Controller
         $Mahasiswa = Mahasiswa::find($Nim);
         
         return view('mahasiswas.nilai', compact('Mahasiswa'));
+    }
+
+    public function cetak_pdf($nim) {
+        $Mahasiswa = Mahasiswa::find($nim);
+
+        $pdf = PDF::loadview('mahasiswas.cetak_pdf', ['Mahasiswa' => $Mahasiswa]);
+
+        return $pdf->stream();
     }
 }
     

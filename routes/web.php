@@ -25,4 +25,5 @@ Auth::routes();
 
 Route::get('mahasiswas/nilai/{Nim}', [MahasiswaController::class, 'nilai']);
 Route::resource('mahasiswas', MahasiswaController::class);
+Route::get('mahasiswas/cetak-pdf/{nim}', [MahasiswaController::class, 'cetak_pdf']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
