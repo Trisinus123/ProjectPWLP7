@@ -62,10 +62,14 @@ class MahasiswaController extends Controller
             'Tanggal_Lahir' => 'required',
         ]);
 
+        if($request->file('foto')) {
+            $filename = $request->file('foto')->store('foto', 'public');
+        }
+
         $mahasiswas = new Mahasiswa;
         $mahasiswas->Nim = $request->get('Nim');
         $mahasiswas->Nama = $request->get('Nama');
-        $mahasiswas->foto = $image_name;
+        $mahasiswa->foto = $filename;
         $mahasiswas->Jurusan = $request->get('Jurusan');
         $mahasiswas->No_Handphone = $request->get('No_Handphone');
         $mahasiswas->Email = $request->get('Email');
@@ -118,7 +122,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
-            'Foto' => 'required',
+            'foto' => 'required',
             'kelas' => 'required',
             'Jurusan' => 'required',
             'No_Handphone' => 'required',
@@ -134,6 +138,12 @@ class MahasiswaController extends Controller
         $mahasiswas->Email = $request->get('Email');
         $mahasiswas->Tanggal_Lahir = $request->get('Tanggal_Lahir');
         
+        if ($mahasiswas->foto && file_exists(storage_path('app/public/'.$mahasiswas->foto))) {
+            \Storage::delete('public/'.$mahasiswas->foto);
+        }
+
+        $filename = $request->file('foto')->store('foto', 'public');
+        $mahasiswas->foto = $filename;
 
         $kelas = new Kelas;
         $kelas->id = $request->get('kelas');
